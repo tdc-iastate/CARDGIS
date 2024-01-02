@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CARDGIS", "CARDGIS.vcxproj", "{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		DEBUG64|x64 = DEBUG64|x64
+		DEBUG64|x86 = DEBUG64|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+		Release64|x64 = Release64|x64
+		Release64|x86 = Release64|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}.Debug|x64.ActiveCfg = Debug|x64
+		{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}.Debug|x64.Build.0 = Debug|x64
+		{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}.Debug|x86.ActiveCfg = Debug|Win32
+		{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}.Debug|x86.Build.0 = Debug|Win32
+		{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}.DEBUG64|x64.ActiveCfg = DEBUG64|x64
+		{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}.DEBUG64|x64.Build.0 = DEBUG64|x64
+		{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}.DEBUG64|x86.ActiveCfg = DEBUG64|Win32
+		{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}.DEBUG64|x86.Build.0 = DEBUG64|Win32
+		{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}.Release|x64.ActiveCfg = Release|x64
+		{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}.Release|x64.Build.0 = Release|x64
+		{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}.Release|x86.ActiveCfg = Release|Win32
+		{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}.Release|x86.Build.0 = Release|Win32
+		{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}.Release64|x64.ActiveCfg = Release64|x64
+		{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}.Release64|x64.Build.0 = Release64|x64
+		{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}.Release64|x86.ActiveCfg = Release64|Win32
+		{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}.Release64|x86.Build.0 = Release64|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2FA8899A-08BA-4DD3-B614-1ABA72227FFE}
+	EndGlobalSection
+EndGlobal

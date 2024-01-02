@@ -1,0 +1,634 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="DEBUG64|Win32">
+      <Configuration>DEBUG64</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DEBUG64|x64">
+      <Configuration>DEBUG64</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release64|Win32">
+      <Configuration>Release64</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release64|x64">
+      <Configuration>Release64</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DFACFC58-08C8-4AAF-9AE1-E353A0708D7E}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>CARDGIS</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEBUG64|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEBUG64|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release64|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release64|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DEBUG64|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DEBUG64|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release64|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release64|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEBUG64|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEBUG64|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release64|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release64|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>__WX__;_ODBC_TDC;WIN32;_DEBUG;_CRT_SECURE_NO_DEPRECATE=1;_CRT_NON_CONFORMING_SWPRINTFS=1;_SCL_SECURE_NO_WARNINGS=1;__WXMSW__;__WXDEBUG__;_UNICODE;_WINDOWS;NOPCH</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>f:\wxWidgets-3.1.4\include;f:\wxWidgets-3.1.4\lib\vc_lib\mswud;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>wxmsw30ud_adv.lib;wxmsw30ud_core.lib;wxbase30ud.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;winmm.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;oleacc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>f:\wxWidgets-3.1.4\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>f:\wxWidgets-3.1.4\lib\vc_lib\mswud;f:\wxWidgets-3.1.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>__WX__;_ODBC_TDC;WIN32;_DEBUG;_CRT_SECURE_NO_DEPRECATE=1;_CRT_NON_CONFORMING_SWPRINTFS=1;_SCL_SECURE_NO_WARNINGS=1;__WXMSW__;__WXDEBUG__;_UNICODE;_WINDOWS;NOPCH</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(wxWidgets)\include;$(wxWidgets)\lib\vc_lib\mswud;D:\cpp\cef_binary_3.1650.1562_windows64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>wxmsw30ud_webview.lib;wxmsw30ud_adv.lib;wxmsw30ud_core.lib;wxbase30ud.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;winmm.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;oleacc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>$(wxWidgets)\lib\vc_lib;D:\cpp\cef_binary_3.1650.1562_windows32\out\Debug\lib;D:\cpp\cef_binary_3.1650.1562_windows32\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(wxWidgets)\lib\vc_lib\mswud;$(wxWidgets)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DEBUG64|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>__WX__;_ODBC_TDC;WIN32;_DEBUG;_CRT_SECURE_NO_DEPRECATE=1;_CRT_NON_CONFORMING_SWPRINTFS=1;_SCL_SECURE_NO_WARNINGS=1;__WXMSW__;__WXDEBUG__;_UNICODE;_WINDOWS;NOPCH</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(wxWidgets)\include;$(wxWidgets)\lib\vc_lib\mswud;D:\cpp\cef_binary_3.1650.1562_windows64;D:\cpp\GeographicLib-1.45\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>wxmsw31ud_adv.lib;wxmsw31ud_core.lib;wxbase31ud.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;winmm.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;oleacc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>$(wxWidgets)\lib\vc_lib;D:\cpp\cef_binary_3.1650.1562_windows32\out\Debug\lib;D:\cpp\cef_binary_3.1650.1562_windows32\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(wxWidgets)\lib\vc_lib\mswud;$(wxWidgets)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DEBUG64|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>__WX__;_ODBC_TDC;WIN32;_DEBUG;_CRT_SECURE_NO_DEPRECATE=1;_CRT_NON_CONFORMING_SWPRINTFS=1;_SCL_SECURE_NO_WARNINGS=1;__WXMSW__;__WXDEBUG__;_UNICODE;_WINDOWS;NOPCH;use_lines</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>f:\wxWidgets-3.2.1\include;f:\wxWidgets-3.2.1\lib\vc_x64_lib\mswud;..\CGAL-4.7\include\;..\boost_1_77_0\;..\CGAL-4.7\auxiliary\gmp\include;D:\cpp\GeographicLib-1.46\include;C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\gl\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libpng16.lib;zlib.lib;wxmsw32ud_adv.lib;wxmsw32ud_core.lib;wxbase32ud.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;winmm.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;oleacc.lib;Geographic_d.lib;legacy_stdio_definitions.lib;glu32.lib;wxmsw32ud_gl.lib;tiffd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>f:\wxWidgets-3.2.1\lib\vc_x64_lib;D:\cpp\libPNG\lpng1637\projects\vstudio\x64\Debug Library;D:\cpp\GeographicLib-1.46\windows\Debug64\;..\libtiff\libtiff-master\out\build\x64-DEBUG\libtiff</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <StackReserveSize>8388608</StackReserveSize>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>f:\wxWidgets-3.2.1\lib\vc_x64_lib;f:\wxWidgets-3.2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>__WX__;_ODBC_TDC;NDEBUG;WIN32;_WINDOWS;__WINDOWS__;__WXMSW__;__WIN95__;__WIN32__;WINVER=0x0400;STRICT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>f:\wxWidgets-3.1.4\include;$(WXWIN)\wx2\lib\msw[d];f:\wxWidgets-3.1.4\lib\vc_lib\mswu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>wxmsw30u_adv.lib;wxmsw30u_core.lib;wxbase30u.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;wxregexu.lib;wxexpat.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;winmm.lib;oleacc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>f:\wxWidgets-3.1.4\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>f:\wxWidgets-3.1.4\include;f:\wxWidgets-3.1.4\lib\vc_lib\mswu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release64|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>__WX__;_ODBC_TDC;NDEBUG;WIN32;_WINDOWS;__WINDOWS__;__WXMSW__;__WIN95__;__WIN32__;WINVER=0x0400;STRICT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>f:\wxWidgets-3.1.4\include;$(WXWIN)\wx2\lib\msw[d];f:\wxWidgets-3.1.4\lib\vc_lib\mswu;D:\cpp\GeographicLib-1.45\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>wxmsw31u_adv.lib;wxmsw31u_core.lib;wxbase31u.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;wxregexu.lib;wxexpat.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;winmm.lib;oleacc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>f:\wxWidgets-3.1.4\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>f:\wxWidgets-3.1.0\include;f:\wxWidgets-3.1.0\lib\vc_lib\mswu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>__WX__;_ODBC_TDC;NDEBUG;WIN32;_WINDOWS;__WINDOWS__;__WXMSW__;__WIN95__;__WIN32__;WINVER=0x0400;STRICT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>f:\wxWidgets-3.0.0\include;$(WXWIN)\wx2\lib\msw[d];f:\wxWidgets-3.0.0\lib\vc_lib\mswu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>wxmsw30u_adv.lib;wxmsw30u_core.lib;wxbase30u.lib;wxtiff.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;wxregexu.lib;wxexpat.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;winmm.lib;oleacc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>f:\wxWidgets-3.0.0\lib\vc_lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>f:\wxWidgets-3.0.0\include;f:\wxWidgets-3.0.0\lib\vc_lib\mswu;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release64|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>__WX__;_ODBC_TDC;NDEBUG;WIN32;_WINDOWS;__WINDOWS__;__WXMSW__;__WIN95__;__WIN32__;WINVER=0x0400;STRICT;use_lines;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>f:\wxWidgets-3.2.1\include;f:\wxWidgets-3.2.1\lib\vc_x64_lib\mswu;D:\cpp\GeographicLib-1.46\include\;C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\um\gl\;..\boost_1_77_0\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>libpng16.lib;tiff.lib;zlib.lib;wxmsw32u_adv.lib;wxmsw32u_core.lib;wxbase32u.lib;wxjpeg.lib;wxpng.lib;wxzlib.lib;wxregexu.lib;wxexpat.lib;comctl32.lib;rpcrt4.lib;wsock32.lib;winmm.lib;oleacc.lib;Geographic.lib;legacy_stdio_definitions.lib;opengl32.lib;wxmsw32u_gl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>..\libPNG\lpng1637\projects\vstudio\x64\Release Library;f:\wxWidgets-3.2.1\lib\vc_x64_lib;..\GeographicLib-1.46\windows\Release64\;..\libtiff\libtiff-master\out\build\x64-Release\libtiff;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <StackReserveSize>1073741824</StackReserveSize>
+      <StackCommitSize>1073741824</StackCommitSize>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>f:\wxWidgets-3.2.1\include;f:\wxWidgets-3.2.1\lib\vc_x64_lib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="CARDGIS.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\cardgis_console\router_BHO.h" />
+    <ClInclude Include="..\cardgis_console\flow_network_divergence.h" />
+    <ClInclude Include="..\cardgis_console\flow_network_link.h" />
+    <ClInclude Include="..\cardgis_console\router_NHD.h" />
+    <ClInclude Include="..\cardgis_console\rowset_DownstreamByCOMID.h" />
+    <ClInclude Include="..\cardgis_console\rowset_DownstreamByCounty.h" />
+    <ClInclude Include="..\cardgis_console\rowset_UpstreamCounties.h" />
+    <ClInclude Include="..\cardgis_console\string_grid.h" />
+    <ClInclude Include="..\cardgis_console\UpstreamDownstream.h" />
+    <ClInclude Include="..\Collada\blender_python.h" />
+    <ClInclude Include="..\Collada\camera_time.h" />
+    <ClInclude Include="..\Collada\collada_camera.h" />
+    <ClInclude Include="..\Collada\collada_effect.h" />
+    <ClInclude Include="..\Collada\collada_light.h" />
+    <ClInclude Include="..\Collada\collada_animation.h" />
+    <ClInclude Include="..\Collada\collada_material.h" />
+    <ClInclude Include="..\Collada\collada_object.h" />
+    <ClInclude Include="..\Collada\collada_scene.h" />
+    <ClInclude Include="..\Collada\xml_command_collada.h" />
+    <ClInclude Include="..\Collada\xml_configuration_collada.h" />
+    <ClInclude Include="..\map\BoostProjections.h" />
+    <ClInclude Include="..\map\color_set.h" />
+    <ClInclude Include="..\map\dbase.h" />
+    <ClInclude Include="..\map\dialog_import_shapefile.h" />
+    <ClInclude Include="..\map\dynamic_map.h" />
+    <ClInclude Include="..\map\dynamic_map_gl2.h" />
+    <ClInclude Include="..\map\dynamic_map_wx.h" />
+    <ClInclude Include="..\map\map_object_tiff.h" />
+    <ClInclude Include="..\map\map_object_tiff_gl.h" />
+    <ClInclude Include="..\map\map_object_tiff_wx.h" />
+    <ClInclude Include="..\map\map_scale.h" />
+    <ClInclude Include="..\map\projection_albers.h" />
+    <ClInclude Include="..\map\projection_utm.h" />
+    <ClInclude Include="..\map\shapefile.h" />
+    <ClInclude Include="..\map\shapefile_filter.h" />
+    <ClInclude Include="..\odbc\odbc_database.h" />
+    <ClInclude Include="..\odbc\odbc_database_access.h" />
+    <ClInclude Include="..\odbc\odbc_database_firebird.h" />
+    <ClInclude Include="..\odbc\odbc_database_mysql.h" />
+    <ClInclude Include="..\odbc\odbc_database_sql_server.h" />
+    <ClInclude Include="..\odbc\odbc_field_set.h" />
+    <ClInclude Include="..\SamplingStations\WaterSample.h" />
+    <ClInclude Include="..\Soils\rowset_ssurgo_component.h" />
+    <ClInclude Include="..\Soils\rowset_ssurgo_horizon.h" />
+    <ClInclude Include="..\Soils\rowset_ssurgo_mapunit.h" />
+    <ClInclude Include="..\subbasin_effect\dialog_run_threads.h" />
+    <ClInclude Include="..\subbasin_effect\panel_threads_status.h" />
+    <ClInclude Include="..\subbasin_effect\thread_manager.h" />
+    <ClInclude Include="..\util\arbitrary_counter.h" />
+    <ClInclude Include="..\util\autorange_histogram.h" />
+    <ClInclude Include="..\util\bounding_cube.h" />
+    <ClInclude Include="..\util\card_bitmap.h" />
+    <ClInclude Include="..\util\card_bitmap_png.h" />
+    <ClInclude Include="..\util\card_bitmap_tiff.h" />
+    <ClInclude Include="..\util\custom.h" />
+    <ClInclude Include="..\util\device_coordinate.h" />
+    <ClInclude Include="..\util\dialog_error_list.h" />
+    <ClInclude Include="..\util\dialog_ledger.h" />
+    <ClInclude Include="..\util\dialog_progress.h" />
+    <ClInclude Include="..\util\dialog_prompt.h" />
+    <ClInclude Include="..\util\dynamic_string.h" />
+    <ClInclude Include="..\util\edit_time_point.h" />
+    <ClInclude Include="..\util\exact_decimal.h" />
+    <ClInclude Include="..\util\filename_struct.h" />
+    <ClInclude Include="..\util\interface_window.h" />
+    <ClInclude Include="..\util\interface_window_gl.h" />
+    <ClInclude Include="..\util\interface_window_wx.h" />
+    <ClInclude Include="..\util\Ledger.h" />
+    <ClInclude Include="..\util\listbox_files.h" />
+    <ClInclude Include="..\util\matrix.h" />
+    <ClInclude Include="..\util\message_slot.h" />
+    <ClInclude Include="..\util\panel_ledger.h" />
+    <ClInclude Include="..\util\RecentlyOpened.h" />
+    <ClInclude Include="..\util\RecentlyOpenedDatabases.h" />
+    <ClInclude Include="..\util\RecentlyOpenedShapefiles.h" />
+    <ClInclude Include="..\util\state_names.h" />
+    <ClInclude Include="..\util\Timestamp.h" />
+    <ClInclude Include="..\util\utility.h" />
+    <ClInclude Include="..\util\utility_afx.h" />
+    <ClInclude Include="..\util\xml_parser.h" />
+    <ClInclude Include="AFIDA.h" />
+    <ClInclude Include="astar_router.h" />
+    <ClInclude Include="ChinaRivers.h" />
+    <ClInclude Include="ClipperBuffer.h" />
+    <ClInclude Include="CountyMaster.h" />
+    <ClInclude Include="dialog_distance.h" />
+    <ClInclude Include="dialog_intersect.h" />
+    <ClInclude Include="dialog_LandSalesSSURGO.h" />
+    <ClInclude Include="dialog_match_attribute.h" />
+    <ClInclude Include="dialog_project.h" />
+    <ClInclude Include="dialog_read_layer_data.h" />
+    <ClInclude Include="dialog_read_TIGER.h" />
+    <ClInclude Include="dialog_river_view.h" />
+    <ClInclude Include="E85_Stations.h" />
+    <ClInclude Include="FarmlandFinder.h" />
+    <ClInclude Include="flood_aggregator.h" />
+    <ClInclude Include="GrainPrice.h" />
+    <ClInclude Include="HUC_tree.h" />
+    <ClInclude Include="LAGOS_Algal_Blooms.h" />
+    <ClInclude Include="LakeErie.h" />
+    <ClInclude Include="MapLayerProximity.h" />
+    <ClInclude Include="PipelineAccidents.h" />
+    <ClInclude Include="PolygonMatch.h" />
+    <ClInclude Include="river_view_map.h" />
+    <ClInclude Include="river_view_collada.h" />
+    <ClInclude Include="color_set_histogram.h" />
+    <ClInclude Include="dialog_buffer.h" />
+    <ClInclude Include="dialog_collada.h" />
+    <ClInclude Include="dialog_edit_layer.h" />
+    <ClInclude Include="dialog_import_points.h" />
+    <ClInclude Include="dialog_legend.h" />
+    <ClInclude Include="dialog_read_area.h" />
+    <ClInclude Include="dialog_river.h" />
+    <ClInclude Include="dialog_river_segment.h" />
+    <ClInclude Include="dialog_route_points.h" />
+    <ClInclude Include="dialog_selection.h" />
+    <ClInclude Include="dialog_select_layer.h" />
+    <ClInclude Include="dialog_upstream_downstream.h" />
+    <ClInclude Include="elevation_matrix.h" />
+    <ClInclude Include="IllinoisProductivityIndex.h" />
+    <ClInclude Include="swat_animator.h" />
+    <ClInclude Include="thread_work_intersect.h" />
+    <ClInclude Include="timed_measurements.h" />
+    <ClInclude Include="triangulate.h" />
+    <ClInclude Include="window_legend.h" />
+    <ClInclude Include="dialog_configure.h" />
+    <ClInclude Include="dialog_open_database.h" />
+    <ClInclude Include="frame_CARDGIS.h" />
+    <ClInclude Include="app_CARDGIS.h" />
+    <ClInclude Include="panel_jpeg.h" />
+    <ClInclude Include="panel_shapefile.h" />
+    <ClInclude Include="ZillowSales.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\cardgis_console\router_BHO.cpp" />
+    <ClCompile Include="..\cardgis_console\flow_network_divergence.cpp" />
+    <ClCompile Include="..\cardgis_console\flow_network_link.cpp" />
+    <ClCompile Include="..\cardgis_console\router_NHD.cpp" />
+    <ClCompile Include="..\cardgis_console\rowset_DownstreamByCOMID.cpp" />
+    <ClCompile Include="..\cardgis_console\rowset_DownstreamByCounty.cpp" />
+    <ClCompile Include="..\cardgis_console\rowset_UpstreamCounties.cpp" />
+    <ClCompile Include="..\cardgis_console\string_grid.cpp" />
+    <ClCompile Include="..\cardgis_console\UpstreamDownstream.cpp" />
+    <ClCompile Include="..\Clipper_ver6.4.2\cpp\clipper.cpp" />
+    <ClCompile Include="..\Collada\blender_python.cpp" />
+    <ClCompile Include="..\Collada\camera_time.cpp" />
+    <ClCompile Include="..\Collada\collada_camera.cpp" />
+    <ClCompile Include="..\Collada\collada_effect.cpp" />
+    <ClCompile Include="..\Collada\collada_light.cpp" />
+    <ClCompile Include="..\Collada\collada_animation.cpp" />
+    <ClCompile Include="..\Collada\collada_material.cpp" />
+    <ClCompile Include="..\Collada\collada_object.cpp" />
+    <ClCompile Include="..\Collada\collada_scene.cpp" />
+    <ClCompile Include="..\Collada\xml_command_collada.cpp" />
+    <ClCompile Include="..\Collada\xml_configuration_collada.cpp" />
+    <ClCompile Include="..\map\BoostProjections.cpp" />
+    <ClCompile Include="..\map\color_set.cpp" />
+    <ClCompile Include="..\map\dbase.cpp" />
+    <ClCompile Include="..\map\dialog_import_shapefile.cpp" />
+    <ClCompile Include="..\map\dynamic_map.cpp" />
+    <ClCompile Include="..\map\dynamic_map_gl2.cpp" />
+    <ClCompile Include="..\map\dynamic_map_wx.cpp" />
+    <ClCompile Include="..\map\map_object_tiff.cpp" />
+    <ClCompile Include="..\map\map_object_tiff_gl.cpp" />
+    <ClCompile Include="..\map\map_object_tiff_wx.cpp" />
+    <ClCompile Include="..\map\map_scale.cpp" />
+    <ClCompile Include="..\map\projection_albers.cpp" />
+    <ClCompile Include="..\map\projection_utm.cpp" />
+    <ClCompile Include="..\map\shapefile.cpp" />
+    <ClCompile Include="..\map\shapefile_filter.cpp" />
+    <ClCompile Include="..\odbc\odbc_database.cpp" />
+    <ClCompile Include="..\odbc\odbc_database_access.cpp" />
+    <ClCompile Include="..\odbc\odbc_database_firebird.cpp" />
+    <ClCompile Include="..\odbc\odbc_database_mysql.cpp" />
+    <ClCompile Include="..\odbc\odbc_database_sql_server.cpp" />
+    <ClCompile Include="..\odbc\odbc_field_set.cpp" />
+    <ClCompile Include="..\SamplingStations\WaterSample.cpp" />
+    <ClCompile Include="..\Soils\rowset_ssurgo_component.cpp" />
+    <ClCompile Include="..\Soils\rowset_ssurgo_horizon.cpp" />
+    <ClCompile Include="..\Soils\rowset_ssurgo_mapunit.cpp" />
+    <ClCompile Include="..\subbasin_effect\dialog_run_threads.cpp" />
+    <ClCompile Include="..\subbasin_effect\panel_threads_status.cpp" />
+    <ClCompile Include="..\subbasin_effect\thread_manager.cpp" />
+    <ClCompile Include="..\util\arbitrary_counter.cpp" />
+    <ClCompile Include="..\util\autorange_histogram.cpp" />
+    <ClCompile Include="..\util\bounding_cube.cpp" />
+    <ClCompile Include="..\util\card_bitmap.cpp" />
+    <ClCompile Include="..\util\card_bitmap_png.cpp" />
+    <ClCompile Include="..\util\card_bitmap_tiff.cpp" />
+    <ClCompile Include="..\util\custom.cpp" />
+    <ClCompile Include="..\util\device_coordinate.cpp" />
+    <ClCompile Include="..\util\dialog_error_list.cpp" />
+    <ClCompile Include="..\util\dialog_ledger.cpp" />
+    <ClCompile Include="..\util\dialog_progress.cpp" />
+    <ClCompile Include="..\util\dialog_prompt.cpp" />
+    <ClCompile Include="..\util\dynamic_string.cpp" />
+    <ClCompile Include="..\util\edit_time_point.cpp" />
+    <ClCompile Include="..\util\exact_decimal.cpp" />
+    <ClCompile Include="..\util\filename_struct.cpp" />
+    <ClCompile Include="..\util\interface_window.cpp" />
+    <ClCompile Include="..\util\interface_window_gl.cpp" />
+    <ClCompile Include="..\util\interface_window_wx.cpp" />
+    <ClCompile Include="..\util\Ledger.cpp" />
+    <ClCompile Include="..\util\listbox_files.cpp" />
+    <ClCompile Include="..\util\matrix.cpp" />
+    <ClCompile Include="..\util\message_slot.cpp" />
+    <ClCompile Include="..\util\panel_ledger.cpp" />
+    <ClCompile Include="..\util\RecentlyOpened.cpp" />
+    <ClCompile Include="..\util\RecentlyOpenedDatabases.cpp" />
+    <ClCompile Include="..\util\RecentlyOpenedShapefiles.cpp" />
+    <ClCompile Include="..\util\state_names.cpp" />
+    <ClCompile Include="..\util\Timestamp.cpp" />
+    <ClCompile Include="..\util\utility.cpp" />
+    <ClCompile Include="..\util\utility_afx.cpp" />
+    <ClCompile Include="..\util\xml_parser.cpp" />
+    <ClCompile Include="AFIDA.cpp" />
+    <ClCompile Include="astar_router.cpp" />
+    <ClCompile Include="ChinaRivers.cpp" />
+    <ClCompile Include="ClipperBuffer.cpp" />
+    <ClCompile Include="CountyMaster.cpp" />
+    <ClCompile Include="dialog_distance.cpp" />
+    <ClCompile Include="dialog_intersect.cpp" />
+    <ClCompile Include="dialog_LandSalesSSURGO.cpp" />
+    <ClCompile Include="dialog_match_attribute.cpp" />
+    <ClCompile Include="dialog_project.cpp" />
+    <ClCompile Include="dialog_read_layer_data.cpp" />
+    <ClCompile Include="dialog_read_TIGER.cpp" />
+    <ClCompile Include="dialog_river_view.cpp" />
+    <ClCompile Include="E85_Stations.cpp" />
+    <ClCompile Include="FarmlandFinder.cpp" />
+    <ClCompile Include="flood_aggregator.cpp" />
+    <ClCompile Include="GrainPrice.cpp" />
+    <ClCompile Include="HUC_tree.cpp" />
+    <ClCompile Include="LAGOS_Algal_Blooms.cpp" />
+    <ClCompile Include="LakeErie.cpp" />
+    <ClCompile Include="MapLayerProximity.cpp" />
+    <ClCompile Include="PipelineAccidents.cpp" />
+    <ClCompile Include="PolygonMatch.cpp" />
+    <ClCompile Include="river_view_map.cpp" />
+    <ClCompile Include="river_view_collada.cpp" />
+    <ClCompile Include="color_set_histogram.cpp" />
+    <ClCompile Include="dialog_buffer.cpp" />
+    <ClCompile Include="dialog_collada.cpp" />
+    <ClCompile Include="dialog_edit_layer.cpp" />
+    <ClCompile Include="dialog_import_points.cpp" />
+    <ClCompile Include="dialog_legend.cpp" />
+    <ClCompile Include="dialog_read_area.cpp" />
+    <ClCompile Include="dialog_river.cpp" />
+    <ClCompile Include="dialog_river_segment.cpp" />
+    <ClCompile Include="dialog_route_points.cpp" />
+    <ClCompile Include="dialog_selection.cpp" />
+    <ClCompile Include="dialog_select_layer.cpp" />
+    <ClCompile Include="dialog_upstream_downstream.cpp" />
+    <ClCompile Include="elevation_matrix.cpp" />
+    <ClCompile Include="IllinoisProductivityIndex.cpp" />
+    <ClCompile Include="swat_animator.cpp" />
+    <ClCompile Include="thread_work_intersect.cpp" />
+    <ClCompile Include="timed_measurements.cpp" />
+    <ClCompile Include="triangulate.cpp" />
+    <ClCompile Include="window_legend.cpp" />
+    <ClCompile Include="dialog_configure.cpp" />
+    <ClCompile Include="dialog_open_database.cpp" />
+    <ClCompile Include="frame_CARDGIS.cpp" />
+    <ClCompile Include="app_CARDGIS.cpp" />
+    <ClCompile Include="panel_jpeg.cpp" />
+    <ClCompile Include="panel_shapefile.cpp" />
+    <ClCompile Include="ZillowSales.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CARDGIS.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

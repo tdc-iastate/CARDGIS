@@ -1,0 +1,31 @@
+##
+##
+
+BINARIES = famlog
+
+CXXFLAGS_STANDARD = -g `wx-config --cppflags`
+CXXFLAGS_TDC = -D _ODBC_TDC -D _UNICODE
+CXXFLAGS = ${CXXFLAGS_STANDARD} ${CXXFLAGS_TDC}
+
+LDFLAGS_STANDARD = -g
+# LDFLAGS_FAM = -lfam -laudiere
+LDFLAGS_FAM = -lfam -lSDL_mixer
+LDFLAGS = ${LDFLAGS_STANDARD} ${LDFLAGS_FAM} `wx-config --libs`
+
+all: famlog 
+
+wxSWAT: wxSWAT.o ../i_swat_database/rowset_hru.o ../i_swat_database/rowset_subbasin.o
+	${CXX} -o wxSWAT wxSWAT.o ../i_swat_database/rowset_hru.o ../i_swat_database/rowset_subbasin.o ${LDFLAGS}
+
+wxSWAT.o: wxSWAT.cpp wxSWAT.h
+	g++ ${CXXFLAGS} -c -o wxSWAT.o wxSWAT.cpp
+
+rowset_hru.o: ../i_swat_database/rowset_hru.h ../i_swat_database/rowset_hru.cpp
+	g++ ${CXXFLAGS} -c -o ../i_swat_dataase/rowset_hru.o ../i_swat_database/rowset_hru.cpp
+
+rowset_subbasin.o: ../i_swat_database/rowset_subbasin.h ../i_swat_database/rowset_subbasin.cpp
+	g++ ${CXXFLAGS} -c -o ../i_swat_database/rowset_subbasin.o ../i_swat_database/rowset_subbasin.cpp
+
+clean:
+	-rm -f ${BINARIES}
+
