@@ -125,7 +125,6 @@ class river_view_map {
 
 		void insert_relevant_points
 			(std::set <map_object *> *plotting_stations,
-			const std::set <long> *plotting_streams,
 			const class map_layer *layer,
 			class interface_window *view,
 			dynamic_string &log);

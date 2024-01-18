@@ -1625,19 +1625,12 @@ bool FarmlandFinder::read_proximity_shapefile
 
 	shapefile.filename_source = path_proximity;
 
-	if (id_field_name.get_length () > 0) {
+	if (id_field_name.get_length () > 0)
 		shapefile.id_field_name = id_field_name;
-		shapefile.has_id = true;
-	}
-	else
-		shapefile.has_id = false;
 
-	if (name_field_name.get_length () > 0) {
+	if (name_field_name.get_length () > 0)
 		shapefile.name_field_name = name_field_name;
-		shapefile.has_name = true;
-	}
-	else
-		shapefile.has_name = false;
+
 	shapefile.projection_from_prj_file = true;
 	shapefile.normalize_longitude = false;
 	shapefile.take_dbf_columns = true;
@@ -1682,10 +1675,8 @@ map_layer *FarmlandFinder::import_ssurgo_county_shapefile
 	// map->add (layer_ssurgo_county);
 
 	shapefile.filename_source = filename_ssurgo_shapefile;
-	shapefile.has_id = false;
 	// MUKEY is defined as C,30, which trips importer_shapefile.id_field_overflow
 	// shapefile.id_field_name = "MUKEY";
-	shapefile.has_name = false;
 	shapefile.projection_from_prj_file = true;
 	shapefile.normalize_longitude = false;
 	shapefile.take_dbf_columns = true;
@@ -3255,8 +3246,6 @@ bool FarmlandFinder::overlay_population
 		// Both ID fields are text!
 		// ZCTA5CE10,C,5
 		// GEOID10,C,5
-		importer.has_id = false;
-		importer.has_name = true;
 		importer.name_field_name = "ZCTA5CE10";
 		importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 		importer.normalize_longitude = false;
@@ -3284,8 +3273,6 @@ bool FarmlandFinder::overlay_population
 
 		importer_shapefile importer;
 		importer.filename_source = filename_ua;
-		importer.has_id = false;
-		importer.has_name = true;
 		importer.name_field_name = "NAME10";
 		importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 		importer.normalize_longitude = false;

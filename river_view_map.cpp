@@ -1290,31 +1290,31 @@ void river_view_map::add_streamflow_at_node
 	if ((stream_data = stream_time_changes->find (segment->id)) != stream_time_changes->end ()) {
 		// data already exists for this stream
 
-		std::map <long, timed_measurements>::iterator node_reading;
+		std::map <long, timed_measurements>::iterator previous_node_reading;
 
-		if ((node_reading = stream_data->second.node_readings.find (point_index)) != stream_data->second.node_readings.end ()) {
+		if ((previous_node_reading = stream_data->second.node_readings.find (point_index)) != stream_data->second.node_readings.end ()) {
 			// data exists for this node
 			for (station_day = station_reading->amounts_ppm.begin ();
 			station_day != station_reading->amounts_ppm.end ();
 			++station_day) {
 				pulse_time = station_day->first + time_offset;
-				if ((node_day = node_reading->second.amounts_ppm.find (pulse_time)) != node_reading->second.amounts_ppm.end ())
+				if ((node_day = previous_node_reading->second.amounts_ppm.find (pulse_time)) != previous_node_reading->second.amounts_ppm.end ())
 					// a reading already exists for this day
 					node_day->second += station_day->second * amplification_stream;
 				else {
 					if (std::chrono::duration_cast <std::chrono::seconds> (pulse_time - last_pulse_time).count () > 1)
 						// put a 0-reading 1 day ahead of this reading to keep blender from ramping up
-						write_preday (&node_reading->second.amounts_ppm, stream_width, hours_per_frame, time_offset, station_day);
+						write_preday (&previous_node_reading->second.amounts_ppm, stream_width, hours_per_frame, time_offset, station_day);
 
-					node_reading->second.amounts_ppm.insert (std::pair <std::chrono::system_clock::time_point, double> (pulse_time, (double) stream_width + station_day->second * amplification_stream));
+					previous_node_reading->second.amounts_ppm.insert (std::pair <std::chrono::system_clock::time_point, double> (pulse_time, (double) stream_width + station_day->second * amplification_stream));
 				}
 
 				next_day = station_day;
 				if (++next_day != station_reading->amounts_ppm.end ())
-					write_decay (&node_reading->second.amounts_ppm, stream_width, time_offset, amplification_stream, station_day, &next_day);
+					write_decay (&previous_node_reading->second.amounts_ppm, stream_width, time_offset, amplification_stream, station_day, &next_day);
 				else
 					// station_day was the final reading
-					write_decay (&node_reading->second.amounts_ppm, stream_width, time_offset, amplification_stream, station_day, NULL);
+					write_decay (&previous_node_reading->second.amounts_ppm, stream_width, time_offset, amplification_stream, station_day, NULL);
 
 				last_pulse_time = pulse_time;
 			}
@@ -1428,7 +1428,6 @@ void river_view_map::describe_run
 
 void river_view_map::insert_relevant_points
 	(std::set <map_object *> *plotting_stations,
-	const std::set <long> *plotting_streams,
 	const map_layer *layer,
 	interface_window *view,
 	dynamic_string &log)
@@ -1452,7 +1451,7 @@ void river_view_map::insert_relevant_points
 			for (station = layer->objects.begin ();
 			station != layer->objects.end ();
 			++station) {
-				if (plotting_streams->find ((*station)->attributes_numeric [USGS_ATTRIBUTES_INDEX_COMID]) != plotting_streams->end ())
+				if (plotting_streams.find ((*station)->attributes_numeric [USGS_ATTRIBUTES_INDEX_COMID]) != plotting_streams.end ())
 					plotting_stations->insert (*station);
 			}
 		}

@@ -334,10 +334,8 @@ bool read_census_tracts
 	update_display->update_progress ("Reading Shapefile");
 
 	importer.filename_source = path_shapefile;
-	importer.has_id = false;
 	// importer.id_field_name = "AREAKEY";
 	importer.name_field_name = "AREAKEY";
-	importer.has_name = true;
 	importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 	importer.normalize_longitude = false;
 	importer.take_dbf_columns = true;
@@ -386,10 +384,8 @@ bool read_PlaceTract
 	update_display->update_progress ("Reading Shapefile");
 
 	importer.filename_source = path_shapefile;
-	importer.has_id = true;
 	importer.id_field_name = "FID_tracts";
 	importer.name_field_name = "AREAKEY";
-	importer.has_name = true;
 	importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 	importer.normalize_longitude = false;
 	importer.take_dbf_columns = true;
@@ -441,9 +437,7 @@ bool read_PlaceTract_clipint
 	update_display->update_progress ("Reading Shapefile");
 
 	importer.filename_source = path_shapefile;
-	importer.has_id = false;
 	importer.name_field_name = "AREAKEY";
-	importer.has_name = true;
 	importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 	importer.normalize_longitude = false;
 	importer.take_dbf_columns = true;
@@ -498,9 +492,7 @@ bool read_county_boundaries
 	update_display->update_progress ("Reading Shapefile");
 
 	importer.filename_source = path_shapefile;
-	importer.has_id = true;
 	importer.id_field_name = "GEOID";
-	importer.has_name = true;
 	importer.name_field_name = "NAME";
 	importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 	importer.normalize_longitude = false;
@@ -5854,9 +5846,7 @@ bool read_tiger_streets
 					importer.filename_source = *county_folder;
 					importer.filename_source += PATH_SEPARATOR;
 					importer.filename_source.add_formatted ("tl_2015_%02d%03d_roads.shp", *state, county_fips);
-					importer.has_id = true;
 					importer.id_field_name = "LINEARID";
-					importer.has_name = true;
 					importer.name_field_name = "FULLNAME";
 					importer.take_dbf_columns = false;
 

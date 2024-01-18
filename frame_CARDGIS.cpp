@@ -4213,9 +4213,7 @@ bool frame_CARDGIS::read_water_bodies
 		}
 
 		importer.filename_source = path_shapefile;
-		importer.has_id = true;
 		importer.id_field_name = "COMID";
-		importer.has_name = true;
 		importer.name_field_name = "GNIS_NAME";
 		importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 		importer.normalize_longitude = false;
@@ -5958,7 +5956,7 @@ void frame_CARDGIS::OnWrite2dAnimation
 			if (river_viewer.render_layers [layer_index]) {
 				if ((*layer)->type == MAP_OBJECT_POINT) {
 					selected_objects.clear ();
-					river_viewer.insert_relevant_points (&selected_objects, &river_viewer.plotting_streams, *layer, &view, log);
+					river_viewer.insert_relevant_points (&selected_objects, *layer, &view, log);
 					river_viewer.plotting_objects.insert (std::pair <dynamic_string, std::set <map_object *>> ((*layer)->name, selected_objects));
 
 					if ((*layer)->name == "STORET Legacy") {
@@ -9018,9 +9016,7 @@ void frame_CARDGIS::OnReadIowaLakes
 
 	if (layer_rivers) {
 		importer.filename_source = "R:\\DKEISER\\updown\\iowa\\132iowalakes\\132Lakes.shp";
-		importer.has_id = true;
 		importer.id_field_name = "ID";
-		importer.has_name = true;
 		importer.name_field_name = "LAKE_NAME";
 		importer.projection = SHAPEFILE_PROJECTED_UTM;
 		importer.take_dbf_columns = false;
@@ -10236,9 +10232,7 @@ bool frame_CARDGIS::read_zipcode_shapefile
 	// Both ID fields are text!
 	// ZCTA5CE10,C,5
 	// GEOID10,C,5
-	importer.has_id = false;
 	// importer.id_field_name = "GEOID10";
-	importer.has_name = true;
 	importer.name_field_name = "ZCTA5CE10";
 	importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 	importer.normalize_longitude = false;
@@ -10862,8 +10856,6 @@ void frame_CARDGIS::OnSSURGOZipCodes
 	{
 		importer_shapefile importer_ssurgo;
 		importer_ssurgo.filename_source = filename_ssurgo;
-		importer_ssurgo.has_id = false;
-		importer_ssurgo.has_name = true;
 		importer_ssurgo.name_field_name = "MUSYM";
 		importer_ssurgo.projection = SHAPEFILE_PROJECTED_UTM;
 		importer_ssurgo.longitude_central_meridian = -93;
@@ -10994,9 +10986,7 @@ void frame_CARDGIS::OnHUC12Upstream
 
 	filename_HUC_shp = "H:\\scratch\\HUC12_USA\\NHDPlusV21_NationalData_WBDSnapshot_Shapefile_08\\NHDPlusNationalData\\WBDSnapshot_National.shp";
 	importer.filename_source = filename_HUC_shp;
-	importer.has_id = true;
 	importer.id_field_name = "OBJECTID_1";
-	importer.has_name = true;
 	importer.name_field_name = "HUC_12";
 	importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 	importer.longitude_central_meridian = -93;
@@ -11105,9 +11095,7 @@ void frame_CARDGIS::OnHUC8Upstream
 
 	filename_HUC_shp = "D:\\GIS\\HUC8\\WBDHU8.shp";
 	importer.filename_source = filename_HUC_shp;
-	importer.has_id = true;
 	importer.id_field_name = "HUC8";
-	importer.has_name = true;
 	importer.name_field_name = "NAME";
 	importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 	importer.normalize_longitude = false;
@@ -12563,9 +12551,7 @@ void frame_CARDGIS::OnBHOReservoirMunicipality
 
 		layer_muni = map_watershed->create_new (MAP_OBJECT_POLYGON);
 		importer.filename_source = filename_muni;
-		importer.has_id = true;
 		importer.id_field_name = "CD_MUN";
-		importer.has_name = true;
 		importer.name_field_name = "NM_MUN";
 		importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 		importer.normalize_longitude = false;
@@ -12963,16 +12949,12 @@ void frame_CARDGIS::OnFarmlandFinderFieldCircles
 			pather.set_path (path_shapefile.get_text ());
 			pather.write_file_specification (&shapefile.filename_source);
 
-			shapefile.has_id = true;
-			shapefile.has_name = true;
 			shapefile.write_from_map_layer (layer_circles, NULL, true, &view, log);
 
 			if (write_half_mile) {
 				pather.set_filename ("FarmlandFinder plus-half-mile radius.shp");
 				pather.write_file_specification (&shapefile.filename_source);
 
-				shapefile.has_id = true;
-				shapefile.has_name = true;
 				shapefile.write_from_map_layer (layer_radius_half_mile, NULL, true, &view, log);
 			}
 
@@ -12980,8 +12962,6 @@ void frame_CARDGIS::OnFarmlandFinderFieldCircles
 				pather.set_filename("FarmlandFinder plus-mile radius.shp");
 				pather.write_file_specification(&shapefile.filename_source);
 
-				shapefile.has_id = true;
-				shapefile.has_name = true;
 				shapefile.write_from_map_layer(layer_radius_mile, NULL, true, &view, log);
 			}
 
@@ -12989,8 +12969,6 @@ void frame_CARDGIS::OnFarmlandFinderFieldCircles
 				pather.set_filename("FarmlandFinder plus-3-mile radius.shp");
 				pather.write_file_specification(&shapefile.filename_source);
 
-				shapefile.has_id = true;
-				shapefile.has_name = true;
 				shapefile.write_from_map_layer(layer_radius_3mile, NULL, true, &view, log);
 			}
 		}
@@ -13069,9 +13047,7 @@ void frame_CARDGIS::OnFarmlandFinderSSURGO
 		map_watershed->layers.push_back (layer_farm_sales);
 
 		shapefile.filename_source = filename_sales;
-		shapefile.has_id = true;
 		shapefile.id_field_name = "ID";
-		shapefile.has_name = false;
 		shapefile.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 		shapefile.normalize_longitude = false;
 		shapefile.take_dbf_columns = true;
@@ -14161,9 +14137,7 @@ void frame_CARDGIS::OnFarmlandFinderPowerlines
 		map_watershed->layers.push_back (layer_feets[powerline_index]);
 
 		importer.filename_source = filename_feets[powerline_index];
-		importer.has_id = true;
 		importer.id_field_name = "ID";
-		importer.has_name = false;
 		importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 		importer.normalize_longitude = false;
 		importer.take_dbf_columns = true;
@@ -14185,9 +14159,7 @@ void frame_CARDGIS::OnFarmlandFinderPowerlines
 		map_watershed->layers.push_back (layer_sales);
 
 		importer.filename_source = filename_sales;
-		importer.has_id = true;
 		importer.id_field_name = "ID";
-		importer.has_name = true;
 		importer.name_field_name = "NAME";
 		importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 		importer.normalize_longitude = false;
@@ -14220,9 +14192,7 @@ void frame_CARDGIS::OnFarmlandFinderPowerlines
 		map_watershed->layers.push_back (layer_half_mile);
 
 		importer.filename_source = filename_half_mile;
-		importer.has_id = true;
 		importer.id_field_name = "ID";
-		importer.has_name = true;
 		importer.name_field_name = "NAME";
 		importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 		importer.normalize_longitude = false;
@@ -14253,9 +14223,7 @@ void frame_CARDGIS::OnFarmlandFinderPowerlines
 		map_watershed->layers.push_back (layer_mile);
 
 		importer.filename_source = filename_mile;
-		importer.has_id = true;
 		importer.id_field_name = "ID";
-		importer.has_name = true;
 		importer.name_field_name = "NAME";
 		importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 		importer.normalize_longitude = false;
@@ -14367,9 +14335,7 @@ void frame_CARDGIS::On_OutlineMatchingWind
 			view.update_progress ("Reading Points");
 			// importer.filename_source = "I:\\TDC\\FarmlandFinder\\wind speed\\intersect_states_wgs1984.shp"; 
 			importer.filename_source = "h:\\scratch\\FarmlandFinder\\wind speed\\intersect_states_wgs1984.shp";
-			importer.has_id = true;
 			importer.id_field_name = "OBJECTID";
-			importer.has_name = false;
 			importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 			importer.normalize_longitude = false;
 			importer.take_dbf_columns = true;
@@ -14425,9 +14391,7 @@ void frame_CARDGIS::On_OutlineMatchingWind
 
 			view.update_progress ("Reading Grid");
 			importer.filename_source = layer_gridpoints->name;
-			importer.has_id = true;
 			importer.id_field_name = "ID";
-			importer.has_name = false;
 			importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 			importer.normalize_longitude = false;
 			importer.take_dbf_columns = true;
@@ -14533,9 +14497,7 @@ void frame_CARDGIS::On_MatchUMRBHUCs
 		view.update_progress ("Reading SWAT Polygons");
 
 		importer.filename_source = filename_swat;
-		importer.has_id = true;
 		importer.id_field_name = "OBJECTID";
-		importer.has_name = false;
 		importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 		importer.normalize_longitude = false;
 		importer.take_dbf_columns = true;
@@ -14556,9 +14518,7 @@ void frame_CARDGIS::On_MatchUMRBHUCs
 		view.update_progress ("Reading HUC12 Polygons");
 
 		importer.filename_source = filename_huc12;
-		importer.has_id = true;
 		importer.id_field_name = "TNMID";
-		importer.has_name = true;
 		importer.name_field_name = "NAME";
 		importer.projection_from_prj_file = true;
 		importer.normalize_longitude = false;
@@ -14651,9 +14611,7 @@ void frame_CARDGIS::On_ListNearbyLakes
 		// JOHN A DOE2	0	Y	2	F	19153	5100	3049	103 SW 3RD ST	APT 317	DES MOINES	IA	50309	4774	N	N	H	1	N	C101	516	0347A	920	C	4	1	679	19780	19780	3	B	2		4	17	4	74	1	N	53917	1105	24	24	0		0000000000000000000		2	10000000000000000000.00000000000		K	U	CAITLIN GALLAGHER	103 SW 3RD ST												41.58356700600	-93.61913098600
 
 		importer.filename_source = filename_user_address;
-		importer.has_id = true;
 		importer.id_field_name = "SEQUENCE";
-		importer.has_name = true;
 		importer.name_field_name = "NAME";
 		importer.projection_from_prj_file = true; // wgs_1984
 		importer.normalize_longitude = false;
@@ -14787,9 +14745,7 @@ void frame_CARDGIS::On_BufferPolygonLayers
 			importer_shapefile importer;
 			view.update_progress ("Reading Polygons");
 			importer.filename_source = filename_wind_speed;
-			importer.has_id = true;
 			importer.id_field_name = "OBJECTID";
-			importer.has_name = false;
 			importer.projection_from_prj_file = true;
 			importer.normalize_longitude = false;
 			importer.take_dbf_columns = true;
@@ -14873,9 +14829,7 @@ void frame_CARDGIS::On_IntersectWindLayers
 			importer_shapefile importer;
 			view.update_progress ("Reading Polygons");
 			importer.filename_source = filename_wind_speed;
-			importer.has_id = true;
 			importer.id_field_name = "ID";
-			importer.has_name = false;
 			importer.projection_from_prj_file = true;
 			importer.normalize_longitude = false;
 			importer.take_dbf_columns = true; // ID, Wind Speed, Wind Speed1, Cell Count
@@ -14895,9 +14849,7 @@ void frame_CARDGIS::On_IntersectWindLayers
 			importer_shapefile importer;
 			view.update_progress ("Reading States");
 			importer.filename_source = filename_states;
-			importer.has_id = true;
 			importer.id_field_name = "STATE_FIPS";
-			importer.has_name = true;
 			importer.name_field_name = "STATE_NAME";
 			importer.projection_from_prj_file = true;
 			importer.normalize_longitude = false;
@@ -14918,9 +14870,7 @@ void frame_CARDGIS::On_IntersectWindLayers
 			importer_shapefile importer;
 			view.update_progress ("Reading Buffer 1");
 			importer.filename_source = filename_buffer_1;
-			importer.has_id = true;
 			importer.id_field_name = "ID";
-			importer.has_name = false;
 			importer.projection_from_prj_file = true;
 			importer.normalize_longitude = false;
 			importer.take_dbf_columns = true;
@@ -14940,9 +14890,7 @@ void frame_CARDGIS::On_IntersectWindLayers
 			importer_shapefile importer;
 			view.update_progress ("Reading Buffer 2");
 			importer.filename_source = filename_buffer_2;
-			importer.has_id = true;
 			importer.id_field_name = "ID";
-			importer.has_name = false;
 			importer.projection_from_prj_file = true;
 			importer.normalize_longitude = false;
 			importer.take_dbf_columns = true;
@@ -15114,9 +15062,7 @@ void frame_CARDGIS::On_WindDistances
 			importer_shapefile importer;
 			view.update_progress ("Reading Points");
 			importer.filename_source = filename_points;
-			importer.has_id = false;
 			// importer.id_field_name = "ID";
-			importer.has_name = true;
 			importer.name_field_name = "ID_TEXT";
 			importer.projection_from_prj_file = true;
 			importer.normalize_longitude = false;
@@ -15140,9 +15086,7 @@ void frame_CARDGIS::On_WindDistances
 			importer_shapefile importer;
 			view.update_progress ("Reading Wind 0-2");
 			importer.filename_source = filename_wind_0_2;
-			importer.has_id = true;
 			importer.id_field_name = "ID";
-			importer.has_name = false;
 			importer.projection_from_prj_file = true;
 			importer.normalize_longitude = false;
 			importer.take_dbf_columns = true;
@@ -15162,9 +15106,7 @@ void frame_CARDGIS::On_WindDistances
 			importer_shapefile importer;
 			view.update_progress ("Reading Wind 3-5");
 			importer.filename_source = filename_wind_3_5;
-			importer.has_id = true;
 			importer.id_field_name = "ID";
-			importer.has_name = false;
 			importer.projection_from_prj_file = true;
 			importer.normalize_longitude = false;
 			importer.take_dbf_columns = true;
@@ -15534,9 +15476,7 @@ void frame_CARDGIS::OnZillowPowerlineTable
 			map_watershed->layers.push_back (layer_powerlines);
 
 			importer.filename_source = filename_powerlines;
-			importer.has_id = true;
 			importer.id_field_name = "OBJECTID";
-			importer.has_name = false;
 			importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 			importer.normalize_longitude = false;
 			importer.take_dbf_columns = true;
@@ -16566,7 +16506,7 @@ void frame_CARDGIS::OnGSSURGO_SSURGO
 {
 	dynamic_string log, filename_output, path_ssurgo, report;
 	FarmlandFinder farms;
-	char delimiter = ',', abbreviation[3];
+	char delimiter = ',';
 	bool multithreaded;
 	filename_struct file_parser;
 	std::map <dynamic_string, dynamic_string> farmlndcl_by_mukey;
@@ -16574,7 +16514,6 @@ void frame_CARDGIS::OnGSSURGO_SSURGO
 	std::map <dynamic_string, std::tuple <double, double, double, double>> nccp_by_mukey;
 
 	interface_window_wx view;
-	dialog_run_threads* update_display = NULL;
 
 	path_ssurgo = "e:\\SSURGO\\";
 
@@ -16632,9 +16571,7 @@ void frame_CARDGIS::OnPointPolygonProximity
 	proximator.delimiter = ',';
 	within_check = PROXIMITY_WITHIN_POLYGON_ZERO;
 
-	shapefile.has_id = true;
 	shapefile.id_field_name = "FID_1";
-	shapefile.has_name = true;
 	shapefile.name_field_name = "V1";
 	shapefile.projection_from_prj_file = true;
 	shapefile.normalize_longitude = false;
@@ -16680,7 +16617,7 @@ void frame_CARDGIS::OnPointPolygonProximity
 			// Change to 19.11 to match other columns
 			std::map <int, shapefile_dbase_field>::iterator field;
 			for (field = shapefile_column_order.begin ();
-			stricmp (field->second.Name, "Dist_Solar") != 0;
+			_stricmp (field->second.Name, "Dist_Solar") != 0;
 			++field);
 
 			if (field->second.Length == 13) {

@@ -120,8 +120,8 @@ class river_view_collada : public river_view_map {
 		bool read_sampling_data
 			(const char *filename_db_readings,
 			std::set <map_object *> *plotting_stations,
-			const std::chrono::system_clock::time_point &start_date,
-			const std::chrono::system_clock::time_point &end_date,
+			const std::chrono::system_clock::time_point &first_date,
+			const std::chrono::system_clock::time_point &last_date,
 			// std::map <long, timed_measurements> *time_changes,
 			long *count_samples,
 			class interface_window *view,

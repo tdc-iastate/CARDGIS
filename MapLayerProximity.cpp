@@ -1149,19 +1149,12 @@ ProximityLayer *MapLayerProximity::read_proximity_shapefile
 	shapefile.filename_source = path_proximity;
 	shapefile.filename_source += filename_proximity;
 
-	if (id_field_name.get_length () > 0) {
+	if (id_field_name.get_length () > 0)
 		shapefile.id_field_name = id_field_name;
-		shapefile.has_id = true;
-	}
-	else
-		shapefile.has_id = false;
 
-	if (name_field_name.get_length () > 0) {
+	if (name_field_name.get_length () > 0)
 		shapefile.name_field_name = name_field_name;
-		shapefile.has_name = true;
-	}
-	else
-		shapefile.has_name = false;
+
 	shapefile.projection_from_prj_file = true;
 	shapefile.normalize_longitude = false;
 	shapefile.take_dbf_columns = true;
@@ -1505,19 +1498,12 @@ bool MapLayerProximity::read_state_shapefiles
 			layer_state->name = layer_name;
 
 			shapefile.filename_source = *filename_shp;
-			if (id_field_name.get_length () > 0) {
+			if (id_field_name.get_length () > 0)
 				shapefile.id_field_name = id_field_name;
-				shapefile.has_id = true;
-			}
-			else
-				shapefile.has_id = false;
 
-			if (name_field_name.get_length () > 0) {
+			if (name_field_name.get_length () > 0)
 				shapefile.name_field_name = name_field_name;
-				shapefile.has_name = true;
-			}
-			else
-				shapefile.has_name = false;
+
 			shapefile.projection_from_prj_file = true;
 			shapefile.normalize_longitude = false;
 			shapefile.take_dbf_columns = true;
@@ -1795,19 +1781,12 @@ bool MapLayerProximity::read_shapefile
 	shapefile.filename_source = path_shapefiles;
 	shapefile.filename_source += filename_shapefile;
 
-	if (id_field_name.get_length() > 0) {
+	if (id_field_name.get_length() > 0)
 		shapefile.id_field_name = id_field_name;
-		shapefile.has_id = true;
-	}
-	else
-		shapefile.has_id = false;
 
-	if (name_field_name.get_length() > 0) {
+	if (name_field_name.get_length() > 0)
 		shapefile.name_field_name = name_field_name;
-		shapefile.has_name = true;
-	}
-	else
-		shapefile.has_name = false;
+
 	shapefile.projection_from_prj_file = true;
 	shapefile.normalize_longitude = false;
 	shapefile.take_dbf_columns = true;

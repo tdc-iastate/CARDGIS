@@ -1119,8 +1119,8 @@ void river_view_collada::simulate_flow_stream
 bool river_view_collada::read_sampling_data
 	(const char *filename_db_readings,
 	std::set <map_object *> *plotting_stations,
-	const std::chrono::system_clock::time_point &start_date,
-	const std::chrono::system_clock::time_point &end_date,
+	const std::chrono::system_clock::time_point &first_date,
+	const std::chrono::system_clock::time_point &last_date,
 	long *count_samples,
 	// std::map <long, timed_measurements> *time_changes,
 	interface_window *view,
@@ -1202,8 +1202,8 @@ bool river_view_collada::read_sampling_data
 			if (rowset_water.field_set.move_first (log)) {
 				do {
 					rowset_water.Time.set_time_point (&when);
-					if ((when < start_date)
-					|| (when > end_date)) {
+					if ((when < first_date)
+					|| (when > last_date)) {
 					}
 					else {
 						// log.add_formatted ("%ld\t", water_station_id);
@@ -1213,7 +1213,7 @@ bool river_view_collada::read_sampling_data
 						/*
 						if ((comid = id_by_comid.find (rowset_water.ID)) != id_by_comid.end ()) {
 
-							// frame_number = timestamp_to_frame_number (rowset_water.Time, *start_date);
+							// frame_number = timestamp_to_frame_number (rowset_water.Time, *first_date);
 
 							/*
 							if (rowset_water.ID == stream_readings.id)
@@ -1261,8 +1261,8 @@ bool river_view_collada::read_sampling_data
 					if (rowset_water.field_set.open (db_odbc, log, filter)) {
 						if (rowset_water.field_set.move_first (log)) {
 							do {
-								if ((rowset_water.Time < *start_date)
-								|| (rowset_water.Time > *end_date)) {
+								if ((rowset_water.Time < *first_date)
+								|| (rowset_water.Time > *last_date)) {
 								}
 								else {
 									// log.add_formatted ("%ld\t", water_station_id);

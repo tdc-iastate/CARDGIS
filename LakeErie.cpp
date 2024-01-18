@@ -308,9 +308,7 @@ map_layer *LakeErie::read_grid_shapefile
 	layer_erie->draw_as = MAP_OBJECT_DRAW_OUTLINE_LAYER_COLOR;
 	map->layers.push_back (layer_erie);
 
-	importer.has_id = true;
 	importer.id_field_name = "ID";
-	importer.has_name = false;
 	importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 	importer.filename_source = "I:\\TDC\\LakeErie\\Lake_Erie_Fishing_Grid_Map\\Lake Erie Grid.shp";
 	importer.take_dbf_columns = true;
@@ -353,7 +351,6 @@ void LakeErie::read
 		importer.projection = SHAPEFILE_PROJECTED_UTM;
 		importer.longitude_central_meridian = -81;
 		importer.normalize_longitude = false;
-		importer.has_id = true;
 		importer.id_field_name = "id";
 
 		if (importer.import (layer_coastal_margin, NULL, map, view, log)) {
@@ -370,7 +367,6 @@ void LakeErie::read
 			importer.projection = SHAPEFILE_PROJECTED_UTM;
 			importer.longitude_central_meridian = -81;
 			importer.normalize_longitude = false;
-			importer.has_id = true;
 			importer.id_field_name = "grid";
 			if (importer.import (layer_grid_centroids, NULL, map, view, log)) {
 

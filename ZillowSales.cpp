@@ -508,9 +508,7 @@ bool ZillowSales::load_zillow_sales
 			map_watershed->layers.push_back (layer_zillow[year_index]);
 
 			importer.filename_source = filename_shapefile;
-			importer.has_id = true;
 			importer.id_field_name = "OBJECTID";
-			importer.has_name = true;
 			importer.name_field_name = "RowID_";
 			importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 			importer.normalize_longitude = false;
@@ -565,8 +563,6 @@ bool ZillowSales::load_EColi_outbreaks
 	map_watershed->layers.push_back (layer_ecoli);
 
 	importer.filename_source = filename_ecoli;
-	importer.has_id = false;
-	importer.has_name = true;
 	importer.name_field_name = "Site_descr";
 	importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 	importer.normalize_longitude = false;

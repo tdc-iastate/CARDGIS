@@ -130,9 +130,7 @@ map_layer* dialog_intersect::ag_sale_circles(dynamic_string& log)
 	shapefile.filename_source = "H:\\NewYorkAgSales\\NYS_Ag_Sales_08102023 Circles\\FarmlandFinder plus-3-mile radius.shp";
 
 	shapefile.id_field_name = "ID";
-	shapefile.has_id = true;
 	shapefile.name_field_name = "Name";
-	shapefile.has_name = true;
 
 	shapefile.projection_from_prj_file = true;
 	shapefile.normalize_longitude = false;
@@ -162,9 +160,7 @@ map_layer* dialog_intersect::urban_areas(dynamic_string& log)
 	shapefile.filename_source = "H:\\NewYorkAgSales\\tl_rd22_us_uac20_WGS1984\\tl_rd22_us_uac20_WGS1984.shp";
 
 	shapefile.id_field_name = "UACE20";
-	shapefile.has_id = true;
 	shapefile.name_field_name = "NAME20";
-	shapefile.has_name = true;
 
 	shapefile.projection_from_prj_file = true;
 	shapefile.normalize_longitude = false;

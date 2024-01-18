@@ -214,9 +214,7 @@ bool LAGOS_Algal_Blooms::read_shapefile
 	map->layers.push_back (layer_lagos);
 
 	shapefile.filename_source = filename_lagos_shapefile;
-	shapefile.has_id = true;
 	shapefile.id_field_name = "lagoslakei";
-	shapefile.has_name = true;
 	shapefile.name_field_name = "gnis_name";
 	shapefile.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 	shapefile.normalize_longitude = false;

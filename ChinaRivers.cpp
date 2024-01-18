@@ -373,7 +373,6 @@ map_layer *ChinaRivers::import_point_layer
 	map_watershed->layers.push_back(layer_points);
 
 	importer.filename_source = filename;
-	importer.has_id = true;
 	importer.id_field_name = "ID";
 	importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 	importer.normalize_longitude = false;
@@ -439,8 +438,6 @@ map_layer *ChinaRivers::build_point_layer
 
 		importer.filename_source = filename_china_root;
 		importer.filename_source += *level;
-		importer.has_id = false;
-		importer.has_name = true;
 		importer.name_field_name = "NAME";
 		importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 		importer.normalize_longitude = false;
@@ -594,9 +591,7 @@ map_layer *ChinaRivers::read_counties
 	map_watershed->layers.push_back(layer_counties);
 
 	importer.filename_source = filename;
-	importer.has_id = true;
 	importer.id_field_name = "BOUNT_ID";
-	importer.has_name = true;
 	importer.name_field_name = "NAME99";
 	importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 	importer.normalize_longitude = false;
@@ -664,8 +659,6 @@ bool ChinaRivers::read_5_levels
 
 		importer.filename_source = filename_china_root;
 		importer.filename_source += *level;
-		importer.has_id = false;
-		importer.has_name = true;
 		importer.name_field_name = "NAME";
 		importer.projection = SHAPEFILE_PROJECTED_LAT_LONG;
 		importer.normalize_longitude = false;
