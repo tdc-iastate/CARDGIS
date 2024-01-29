@@ -251,19 +251,7 @@ bool panel_shapefile::select_id
 			erase_selection (gl_interface_window);
 
 			layer_selection->clear_objects ();
-			switch (polygon->type) {
-				case MAP_OBJECT_POINT:
-					layer_selection->draw_as = MAP_OBJECT_DRAW_SYMBOL_LAYER_COLOR;
-					layer_selection->symbol = MAP_OBJECT_SYMBOL_CIRCLE;
-					break;
-				case MAP_OBJECT_POLYGON:
-					// case LAYER_TYPE_POLYLINE:
-					layer_selection->draw_as = MAP_OBJECT_DRAW_OUTLINE_LAYER_COLOR;
-					break;
-				case MAP_OBJECT_POLYGON_COMPLEX:
-					layer_selection->draw_as = MAP_OBJECT_DRAW_OUTLINE_LAYER_COLOR;
-			}
-
+			layer_selection->draw_as = layer_selection_source->draw_as;
 			selection_copy = layer_selection_source->create_new (polygon->type);
 			selection_copy->copy (polygon, layer_selection);
 			layer_selection->objects.push_back (selection_copy);
@@ -278,18 +266,7 @@ bool panel_shapefile::select_id
 			interface_window *view = create_interface (true);
 			erase_selection (view);
 			layer_selection->clear_objects ();
-			switch (polygon->type) {
-				case MAP_OBJECT_POINT:
-					layer_selection->draw_as = MAP_OBJECT_DRAW_SYMBOL_LAYER_COLOR;
-					layer_selection->symbol = MAP_OBJECT_SYMBOL_CIRCLE;
-					break;
-				case MAP_OBJECT_POLYGON:
-					layer_selection->draw_as = MAP_OBJECT_DRAW_OUTLINE_LAYER_COLOR;
-					break;
-				case MAP_OBJECT_POLYGON_COMPLEX:
-					layer_selection->draw_as = MAP_OBJECT_DRAW_OUTLINE_LAYER_COLOR;
-			}
-
+			layer_selection->draw_as = layer_selection_source->draw_as;
 			selection_copy = layer_selection_source->create_new (polygon->type);
 			selection_copy->copy (polygon, layer_selection);
 			layer_selection->objects.push_back (selection_copy);
@@ -340,16 +317,7 @@ void panel_shapefile::create_selection_layer
 	layer_selection->name = "Selection";
 	layer_selection->color = RGB (255, 0, 0);
 	layer_selection->include_in_legend = false;
-
-	if (layer_selection->type == MAP_OBJECT_POINT) {
-		layer_selection->draw_as = MAP_OBJECT_DRAW_SYMBOL_LAYER_COLOR;
-		layer_selection->symbol = layer_selection_source->symbol; // MAP_OBJECT_SYMBOL_PLUS;
-	}
-	else {
-		layer_selection->draw_as = MAP_OBJECT_DRAW_OUTLINE_LAYER_COLOR;
-	}
-
-
+	layer_selection->draw_as = layer_selection_source->draw_as;
 	selection_layer_attributes ();
 
 	map->layers.push_back (layer_selection);

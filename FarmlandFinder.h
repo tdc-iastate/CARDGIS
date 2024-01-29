@@ -6,7 +6,8 @@ const int FARMLANDFINDER_FORMAT_LISTING_1 = 3;
 const int FARMLANDFINDER_FORMAT_LISTING_2 = 4;
 const int FARMLANDFINDER_FORMAT_NIEYAN = 5;
 const int FARMLANDFINDER_FORMAT_REDUCED = 6; // 2023-03-15 "I:\TDC\FarmlandFinder\2022-08-15\Range_Ag_Farmland_Sales_Since_Nov2020.csv"
-const int FARMLANDFINDER_FORMAT_PREVIOUS_OUTPUT = 7; // 2023-03-23 "F:\FarmlandFinder\2022-08-15\Range_Ag_Farmland_Sales_Since_Nov2020-5mile-SSURGO-Auction-IA.csv"
+// const int FARMLANDFINDER_FORMAT_PREVIOUS_OUTPUT = 7; // 2023-03-23 "F:\FarmlandFinder\2022-08-15\Range_Ag_Farmland_Sales_Since_Nov2020-5mile-SSURGO-Auction-IA.csv"
+const int FARMLANDFINDER_FORMAT_2024_01_19 = 7;
 const int FARMLANDFINDER_FORMAT_NYS = 8;
 
 const int FARMLANDFINDER_SALE_ATTRIBUTE_INDEX_STATE_FIPS = 2;
@@ -121,6 +122,7 @@ class FarmlandFinder {
 		class map_layer *create_circles_area
 			(class dynamic_map *map,
 			const bool measure_and_adjust,
+			class interface_window* view,
 			dynamic_string &log);
 
 		class map_layer *create_circles_radius
@@ -207,11 +209,18 @@ class FarmlandFinder {
 			class interface_window *view,
 			dynamic_string &error_message);
 
+		class map_layer* read_sales
+			(const dynamic_string& filename_sales,
+			class dynamic_map*,
+			class CountyMaster* counties,
+			class interface_window*,
+			dynamic_string& log);
 		bool read_sales
 			(std::map <dynamic_string, int>* filename_and_formats,
 			class CountyMaster*,
 			const bool write_rows, // to match original spreadsheet rows
 			const int limit,
+			class interface_window *,
 			dynamic_string& log);
 		bool read_ssurgo_datamart
 			(class odbc_database* db_ssurgo,
@@ -236,13 +245,6 @@ class FarmlandFinder {
 			const bool write_soils,
 			class interface_window *,
 			dynamic_string& log) const;
-
-		class map_layer *read_sales
-			(const dynamic_string &filename_sales,
-			class dynamic_map *,
-			class CountyMaster *counties,
-			class interface_window *,
-			dynamic_string &log);
 
 		bool read_gSSURGO_mapunit
 			(const dynamic_string &path_ssurgo,
@@ -323,6 +325,11 @@ class FarmlandFinder {
 			class FarmlandFinderSale* sale,
 			dynamic_string& log);
 		bool parse_reduced_format
+		(std::vector <dynamic_string>* tokens,
+			class CountyMaster* counties,
+			class FarmlandFinderSale* sale,
+			dynamic_string& log);
+		bool parse_2024_01_19
 			(std::vector <dynamic_string>* tokens,
 			class CountyMaster* counties,
 			class FarmlandFinderSale* sale,

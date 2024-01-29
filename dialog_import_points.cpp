@@ -303,8 +303,13 @@ void dialog_import_points::OnBrowsePointFile
 	(wxCommandEvent &)
 
 {
-	if (get_read_path (filename_points, L"Point Files (*.csv)|*.csv", NULL))
-		static_filename->SetLabel (filename_points->get_text ());
+	if (get_read_path (filename_points, L"Point Files (*.csv)|*.csv", NULL)) {
+		int index = combo_format->GetSelection();
+		if (index >= 0)
+			setup_format(index + 1);
+		show_file ();
+		show_ledger ();
+	}
 }
 
 void dialog_import_points::set_columns (int *column_count)

@@ -350,6 +350,7 @@ BEGIN_EVENT_TABLE (frame_CARDGIS, wxFrame)
 	EVT_MENU(IMPORT_NHDPLUS_HR_GEOMETRY, frame_CARDGIS::OnImport_NHDPlus_HR_geometry)
 	EVT_MENU(IMPORT_NHDPLUS_HR_NETWORK, frame_CARDGIS::OnImport_NHDPlus_HR_network)
 	EVT_MENU(EDIT_DELETE_SUBPOLYGON, frame_CARDGIS::OnDeleteSubPolygon)
+	EVT_MENU(MENU_IOWA_CATCHMENTS, frame_CARDGIS::OnReadIowaCatchments)
 	EVT_BUTTON(BUTTON_CURRENT_PROJECT, frame_CARDGIS::OnPointPolygonProximity)
 END_EVENT_TABLE()
 
@@ -778,6 +779,7 @@ void frame_CARDGIS::create_menus ()
 		menuPopupProject->Append(MENU_COUNTIES_UPSTREAM_STRAHLER, wxT("List Counties Upstream by Strahler"), wxT("Find counties upstream with Strahler Order threshold."));
 		menuPopupProject->Append(MENU_COMBINE_COUNTIES_UPSTREAM, wxT("Combine Counties Upstream"), wxT("Combine tables of upstream counties from different areas"));
 		menuPopupProject->Append(MENU_FISH_ADVISERIES, wxT("Map fish adviseries"), wxT("Map fish adviseries"));
+		menuPopupProject->Append(MENU_IOWA_CATCHMENTS, wxT("Map Iowa Catchments"), wxT("List COMIDS upstream from Iowa Catchments"));
 
 	
 	    wxMenu * const menuPopup_BHO = new wxMenu;
@@ -4164,9 +4166,10 @@ void frame_CARDGIS::OnShowSelection
 void frame_CARDGIS::OnSelectionClear
 	(wxCommandEvent&)
 {
-	if (panel_watershed->layer_selection
-	&& (panel_watershed->layer_selection->objects.size () > 0)) {
+	if (panel_watershed->layer_selection) {
 		panel_watershed->layer_selection->objects.clear ();
+		delete panel_watershed->layer_selection;
+		panel_watershed->layer_selection = NULL;
 		panel_watershed->redraw (L"Clear Selection");
 	}
 }
@@ -9110,7 +9113,6 @@ void frame_CARDGIS::OnReadIowaLakes
 	}
 }
 
-
 void frame_CARDGIS::OnReadE85Stations
 	(wxCommandEvent&)
 
@@ -12855,6 +12857,9 @@ void frame_CARDGIS::OnZillow1000m
 void frame_CARDGIS::OnFarmlandFinderFieldCircles
 	(wxCommandEvent &)
 
+// Creates a shapefile with circles centered on a FarmlandFinder sale location, with area = listed sale area.
+// Can also create layers with circles extending 0.5 mile, 1.0 mile, or 3.0 miles beyond the listed sale area.
+
 // 2021-01-07 Wendong: Create circles for each sale record from "I:\TDC\FarmlandFinder\All State Auction Results.xlsx"
 // using assumed centerpoint and an area corresponding to Gross Acres
 
@@ -12898,13 +12903,24 @@ void frame_CARDGIS::OnFarmlandFinderFieldCircles
 	write_half_mile = write_mile = true;
 	*/
 
+	/*
 	// 2023-08-14
 	path_shapefile = "H:\\NewYorkAgSales\\NYS_Ag_Sales_08102023 Circles\\";
 	filename_shapefile = "NYS_Ag_Sales_08102023.shp";
-	filenames_sales.insert (std::pair <dynamic_string, int> ("I:\\TDC\\NewYorkAgSales\\NYS_Ag_Sales_08102023.csv", FARMLANDFINDER_FORMAT_NYS));
+	filenames_sales.insert(std::pair <dynamic_string, int>("I:\\TDC\\NewYorkAgSales\\NYS_Ag_Sales_08102023.csv", FARMLANDFINDER_FORMAT_NYS));
 	write_shapefile = true;
 	write_half_mile = write_mile = false;
 	write_three_mile = true;
+	measure_and_correct = true;
+	*/
+
+	// 2024-01-19
+	path_shapefile = "F:\\FarmlandFinder\\2024-01-19\\";
+	filename_shapefile = "ATTOMandFarmlandFinder_IAMNNE_V2.shp";
+	filenames_sales.insert(std::pair <dynamic_string, int>("I:\\TDC\\FarmlandFinder\\2024-01-19\\ATTOMandFarmlandFinder_IAMNNE_V2.csv", FARMLANDFINDER_FORMAT_2024_01_19));
+	write_shapefile = true;
+	write_half_mile = write_mile = false;
+	write_three_mile = false;
 	measure_and_correct = true;
 
 	interface_window_wx view;
@@ -12913,8 +12929,10 @@ void frame_CARDGIS::OnFarmlandFinderFieldCircles
 	counties.read (filename_county_master.get_text_ascii (), &view, log);
 
 	view.update_progress ("Reading CSV", 0);
-	if (farms.read_sales (&filenames_sales, &counties, !write_shapefile, -1, log)) {
-		layer_circles = farms.create_circles_area (map_watershed, measure_and_correct, log);
+	if (farms.read_sales (&filenames_sales, &counties, !write_shapefile, -1, &view, log)) {
+		layer_circles = farms.create_circles_area (map_watershed, measure_and_correct, &view, log);
+
+		view.update_progress ("Circles Created.", 0);
 
 		{
 			// Check how many points have unique locations
@@ -12989,8 +13007,12 @@ void frame_CARDGIS::OnFarmlandFinderFieldCircles
 void frame_CARDGIS::OnFarmlandFinderSSURGO
 	(wxCommandEvent &)
 
-// Read shapefile of circles for each sale.  Overlap with SSURGO
+// Read shapefile of circles for each FarmlandFinder sale.  Overlap with SSURGO
+// Runs one state at a time, using multi-threading to run counties in parallel
+// County results are written to file, one file per county, then re-read and appended to single state output
 // 
+// (raster) gSSURGO values by mapunit and county are matched to the (polygon) SSURGO polygons
+//
 // 2021-01-25 Add dominant component's representative slope
 
 {
@@ -13021,12 +13043,22 @@ void frame_CARDGIS::OnFarmlandFinderSSURGO
 	retain_county_polygons = -1;
 	*/
 
+	/*
 	// 2023-08-14
 	filename_sales = "H:\\NewYorkAgSales\\NYS_Ag_Sales_08102023 Circles\\NYS_Ag_Sales_08102023.shp";
 	auction_results = false;
 	filename_output = "h:\\NewYorkAgSales\\NYS_Ag_Sales_08102023_SSURGO_overlap.csv";
 	run_state = 36;
 	retain_county_polygons = 19;
+	filter_listing_ids = false;
+	*/
+
+	// 2024-01-23
+	filename_sales = "F:\\FarmlandFinder\\2024-01-19\\ATTOMandFarmlandFinder_IAMNNE_V2.shp";
+	auction_results = false;
+	filename_output = "F:\\FarmlandFinder\\2024-01-19\\ATTOMandFarmlandFinder_IAMNNE_V2_overlap.csv";
+	run_state = 19;
+	retain_county_polygons = 27; // 19, 27, 31
 	filter_listing_ids = false;
 
 	path_ssurgo = "e:\\SSURGO\\";
@@ -13385,7 +13417,7 @@ void frame_CARDGIS::OnFarmlandFinderProximity
 */
 
 	view.update_progress ("Reading CSV", 0);
-	if (farms.read_sales (&filenames_sales, &counties, false, -1, log)) {
+	if (farms.read_sales (&filenames_sales, &counties, false, -1, &view, log)) {
 		if (!cleanup_after)
 			farms.create_point_layer (map_watershed, log);
 		farms.write_proximity_table (filename_output, &view, log);
@@ -16433,13 +16465,11 @@ void frame_CARDGIS::OnIntersectTwoLayers
 {
 	dynamic_string log;
 	map_layer*layer_1, *layer_2, *layer_clipped;
-	flow_network_link* nearest_link;
 	std::vector <long long> downstream_ids, upstream_ids;
 	ClipperBuffer clipper;
 	ClipperLib::Paths paths_1, paths_clipped;
 	std::vector <dynamic_string> tract_id_names;
 	std::vector <double> tract_areas;
-	long long buffer_id;
 	std::set <long long> two_point_instances;
 	router_NHD* router = relevent_router();
 
@@ -16672,3 +16702,106 @@ void frame_CARDGIS::OnPointPolygonProximity
 	d.ShowWindowModal();
 }
 
+void frame_CARDGIS::OnReadIowaCatchments
+(wxCommandEvent&)
+
+// 2024-01-26 Read layer of Iowa N sampling points
+// Find nearest COMID
+// List upstream
+
+{
+	dynamic_string log, filename_sites;
+	map_layer* site_layer;
+	interface_window_wx view;
+	view.start_progress(this);
+	Ledger preview;
+	int index_comid, index_distance_m;
+
+	map_layer* layer_rivers = map_watershed->match("Rivers");
+
+	if (layer_rivers) {
+		int id_column_index, lat_column_index, lon_column_index;
+		std::vector <dynamic_string> raw_text;
+		std::set <int> text_columns, skip_columns;
+
+		filename_sites = "R:\\NHDPlusv2\\2024-01-26\\Nsites.csv";
+		// id_column_index = 0;
+		// lat_column_index = 2;
+		// lon_column_index = 3;
+
+		if (preview_position_file(filename_sites, CSV_POINT_FORMAT_AUTOMATIC, "", 10, &preview, &id_column_index, &lat_column_index, &lon_column_index, &text_columns, &raw_text, log)) {
+
+			SetCursor(*wxHOURGLASS_CURSOR);
+			site_layer = read_point_layer(filename_sites, -1, false, true, CSV_POINT_FORMAT_AUTOMATIC, &preview.column_names, &text_columns, &skip_columns,
+			id_column_index, lat_column_index, lon_column_index, log);
+
+			// Make sure site layer numeric_attributes can hold nearest COMID and distance
+			index_comid = site_layer->attribute_count_numeric;
+			index_distance_m = index_comid + 1;
+			site_layer->resize (index_distance_m + 1, 0);
+
+			site_layer->column_names_numeric.push_back("Nearest COMID");
+			site_layer->column_names_numeric.push_back("Distance");
+
+			site_layer->set_extent ();
+			map_watershed->set_extent();
+
+			panel_watershed->pause_rendering = false;
+			if (site_layer) {
+				panel_watershed->change_layers();
+				panel_watershed->change_selection_layer(site_layer);
+			}
+			enable_map_controls();
+			panel_watershed->redraw("OnReadIowaCatchments");
+			SetCursor(*wxSTANDARD_CURSOR);
+
+
+			view.update_progress("Matching centroids to COMIDs");
+			// find nearest comid to each centerpoint
+			{
+				std::vector <map_object*>::const_iterator center;
+				device_coordinate centerpoint;
+				std::vector <long long> upstream_comids;
+				std::vector <long long>::iterator source;
+				map_object* segment;
+				long distance;
+				int step_count;
+
+				for (center = site_layer->objects.begin();
+				center != site_layer->objects.end();
+				++center) {
+					view.update_progress_formatted(1, "Centroid %lld", (*center)->id);
+					centerpoint.x = (*center)->longitude;
+					centerpoint.y = (*center)->latitude;
+					if ((segment = layer_rivers->find_nearest_object_fast(centerpoint, &distance)) != NULL)
+						(*center)->attributes_numeric[index_comid] = (double)segment->id;
+
+					// Distance is NOT meters
+					(*center)->attributes_numeric[index_distance_m] = (double)distance;
+
+					upstream_comids.clear ();
+					relevent_router()->rivers.accumulate_upstream(segment->id, &upstream_comids);
+
+					log.add_formatted ("%lld", (*center)->id);
+					for (source = upstream_comids.begin(), step_count = 0;
+					source != upstream_comids.end();
+					++source, ++step_count) {
+						log.add_formatted ("\t%lld", *source);
+						if (step_count % 48 == 47)
+							log += "\n";
+					}
+					log += "\n";
+				}
+			}
+		}
+		enable_map_controls();
+	}
+	else
+		log += "ERROR, no river layer.\n";
+
+	if (log.get_length() > 0) {
+		log.convert_linefeeds_for_CEdit();
+		dialog_error_list d(this, L"Iowa Catchments", L"", log);
+		d.ShowWindowModal();
+	}
+}

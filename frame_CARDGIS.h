@@ -50,6 +50,7 @@ class frame_CARDGIS: public wxFrame {
 		void OnReadGridFloat (wxCommandEvent &);
 		void OnPointsUpstreamDownstream (wxCommandEvent &);
 		void OnReadE85Stations (wxCommandEvent &);
+		void OnReadIowaCatchments(wxCommandEvent&);
 
 		// Lake Erie
 		void OnReadLakeErie (wxCommandEvent &);
@@ -576,5 +577,6 @@ enum
 	IMPORT_NHDPLUS_HR_GEOMETRY,
 	IMPORT_NHDPLUS_HR_NETWORK,
 	MENU_PROCESS_INTERSECT_TWO,
-	MENU_POINT_POLYGON
+	MENU_POINT_POLYGON,
+	MENU_IOWA_CATCHMENTS
 };

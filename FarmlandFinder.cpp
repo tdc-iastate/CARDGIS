@@ -194,6 +194,7 @@ bool FarmlandFinder::read_sales
 	CountyMaster *counties,
 	const bool write_rows, // to match original spreadsheet rows
 	const int limit,
+	interface_window *view,
 	dynamic_string &log)
 
 {
@@ -202,7 +203,7 @@ bool FarmlandFinder::read_sales
 	std::map <dynamic_string, int>::iterator filename_sales;
 	dynamic_string data, row_table, inconstant_filename;
 	std::vector <dynamic_string> tokens;
-	long id = 1, count_read, count_valid;
+	long record_number = 1, count_read, count_valid;
 	FarmlandFinderSale sale;
 	bool error = false, valid_record, skip_fragment, done = false;
 
@@ -223,7 +224,7 @@ bool FarmlandFinder::read_sales
 
 					sale.clear ();
 					valid_record = true;
-					sale.id = id++;
+					sale.id = record_number++;
 
 					if (write_rows) {
 						// 2021-02-18 Previous run used line length 1024 which caused some extra IDs for leftover line fragments
@@ -241,7 +242,7 @@ bool FarmlandFinder::read_sales
 								// resulting in fragments appearing as subsequent lines:
 								// "\n"
 								// ",25-147N-44W,Polk,Northwest,Minnesota,47.52652534,-96.21387362"
-							++id;
+							++record_number;
 							skip_fragment = true;
 						}
 					}
@@ -485,11 +486,17 @@ bool FarmlandFinder::read_sales
 							valid_record = false;
 						break;
 					case FARMLANDFINDER_FORMAT_REDUCED:
+						// auction,listing,id,id_text,latitude,longitude,s_t_r
+						// auction,listing,id,id_text,latitude,longitude,s_t_r,GrossPrice,AreaAcres,StateFIPS,CountyFIPS
 						if (!parse_reduced_format (&tokens, counties, &sale, log))
 							valid_record = false;
 						break;
 					case FARMLANDFINDER_FORMAT_NYS:
 						if (!parse_NYS(&tokens, counties, &sale, log))
+							valid_record = false;
+						break;
+					case FARMLANDFINDER_FORMAT_2024_01_19:
+						if (!parse_2024_01_19 (&tokens, counties, &sale, log))
 							valid_record = false;
 					}
 
@@ -528,11 +535,14 @@ bool FarmlandFinder::read_sales
 							row_table += "\n";
 						}
 						else
-							log.add_formatted ("Skipped\t%ld\n", id);
+							log.add_formatted ("Skipped\t%ld\n", record_number);
 					}
 					if ((limit != -1)
-					&& (id > limit))
+					&& (record_number > limit))
 						done = true;
+
+					if (record_number % 1000 == 0)
+						view->update_progress_formatted(1, "Records read %ld", record_number);
 				}
 			}
 			fclose (f);
@@ -582,6 +592,39 @@ bool FarmlandFinder::parse_reduced_format
 				sale->CountyFIPS = counties->get_FIPS(sale->StateFIPS, (*tokens)[10].get_text_ascii());
 			}
 		}
+	}
+	else
+		error = true;
+
+	return !error;
+}
+
+bool FarmlandFinder::parse_2024_01_19
+	(std::vector <dynamic_string>* tokens,
+	CountyMaster* counties,
+	FarmlandFinderSale* sale,
+	dynamic_string& log)
+
+//	UniqueID	ID	State	FIPS	Latitude	Longitude	TransferAmount	AreaAcres	Saleprice	SaleYear	lat_str7	lon_str8
+//	1	5993	IA	19001	41.41925049 - 94.56938934	647800	79	8200	2020	41.4192 - 94.5693
+//	2	6005	IA	19001	41.23476791 - 94.2649231	642600	126	5100	2019	41.2347 - 94.2649
+//	3	6016	IA	19001	41.39406967 - 94.53092194	820000	200	4100	2018	41.394 - 94.5309
+
+{
+	bool error = false;
+	int fips;
+
+	if (tokens->size() == 12) {
+		sale->id = atoi((*tokens)[0].get_text_ascii());
+		sale->id_text = (*tokens)[1];
+		sale->Summary = (*tokens)[1];
+		fips = atoi((*tokens)[3].get_text_ascii());
+		sale->StateFIPS = fips / 1000;
+		sale->CountyFIPS = (fips - (sale->StateFIPS * 1000));
+		sale->latitude = atof((*tokens)[4].get_text_ascii());
+		sale->longitude = atof((*tokens)[5].get_text_ascii());
+		sale->area_acres = atof((*tokens)[7].get_text_ascii());
+		sale->GrossPrice = atof((*tokens)[8].get_text_ascii());
 	}
 	else
 		error = true;
@@ -1028,6 +1071,7 @@ map_object *FarmlandFinder::create_measured_circle
 map_layer *FarmlandFinder::create_circles_area
 	(dynamic_map *map,
 	const bool measure_and_adjust,
+	interface_window *view,
 	dynamic_string &log)
 
 {
@@ -1036,6 +1080,7 @@ map_layer *FarmlandFinder::create_circles_area
 	map_object *circle = NULL;
 	double target_area_m2, circle_area_m2;
 	dynamic_string area_log;
+	int count;
 
 	// Create map layers for dialog_river
 	layer_fields = map->create_new (MAP_OBJECT_POLYGON);
@@ -1063,9 +1108,9 @@ map_layer *FarmlandFinder::create_circles_area
 
 	log += "ID\tAreaAcres\tAreaMeters\n";
 
-	for (sale = sales.begin ();
+	for (sale = sales.begin (), count = 0;
 	sale != sales.end ();
-	++sale) {
+	++sale, ++count) {
 		if (measure_and_adjust) {
 			target_area_m2 = sale->area_acres * M2_PER_ACRE;
 			circle = create_measured_circle (target_area_m2, &circle_area_m2, &*sale, layer_fields, area_log);
@@ -1088,6 +1133,9 @@ map_layer *FarmlandFinder::create_circles_area
 		log.add_formatted ("%ld\t%.4lf\t%.4lf\n", circle->id, circle->attributes_numeric[1], circle->attributes_numeric[6]);
 		circle->set_extent ();
 		layer_fields->objects.push_back (circle);
+
+		if (count % 1000 == 0)
+			view->update_progress_formatted (1, "Create Circles %d", count);
 	}
 
 	log += area_log;
